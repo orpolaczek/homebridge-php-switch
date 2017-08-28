@@ -1,0 +1,80 @@
+<!--
+Taken from: https://gist.github.com/caspyin/9843698
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Simple Status Viewer</title>
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      padding-top: 10px;
+      background-color: #F5F5F5;
+    }
+  </style>
+</head>
+
+<body ng-app="sampleApp">
+
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-9">
+        <div ng-view></div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular-route.min.js"></script>
+  <script>
+        // Define an angular module for our app
+        var sampleApp = angular.module('sampleApp', ['ngRoute']);
+
+        sampleApp.controller('ListDevicesCtrl', function($scope, $http) {
+          function updateDevices() {
+            $http({
+              method: 'GET',
+              url: 'http://localhost:8000/simple_server.php?action=get'
+              }).then(function successCallback(response) {
+                var data = response.data;
+                $scope.devices = [];
+                  for (var property in data) {
+                      if (data.hasOwnProperty(property)) {
+                          $scope.devices.push({"name": property, "state": (data[property] === "true")});
+                      }
+                  }
+              }, function errorCallback(response) {
+              });
+          }
+          setInterval(updateDevices, 1000);
+          $scope.devices = [];
+        });
+
+      </script>
+
+      <!-- Define templates -->
+
+      <div class="container" style="background: #fff" ng-controller="ListDevicesCtrl">
+        <div class="col-md-9">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Device Name.</th>
+                <th>State</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="device in devices">
+                <td>{{$index}}</td>
+                <td>{{device.name}}</td>
+                <td><div style="color: red" ng-if="!device.state">OFF</div> <div style="color: green" ng-if="device.state">ON</div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </body>
+    </html>

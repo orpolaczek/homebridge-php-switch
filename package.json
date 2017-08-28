@@ -1,0 +1,23 @@
+{
+  "name": "homebridge-php-switch",
+  "version": "0.0.1",
+  "description": "Programmable PHP switch plugin for homebridge: https://github.com/nfarina/homebridge. Based on 'FakeBulb': https://github.com/schemish/homebridge-fakebulb",
+  "license": "MIT",
+  "keywords": [
+    "homebridge-plugin"
+  ],
+  "engines": {
+    "node": ">=0.12.0",
+    "homebridge": ">=0.2.0"
+  },
+  "author": {
+    "name": "Or Polaczek"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/orpolaczek/homebridge-php-switch.git"
+  },
+  "dependencies": {
+    "request": "^2.65.0"
+  }
+}

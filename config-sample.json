@@ -1,0 +1,20 @@
+{
+    "bridge": {
+        "name": "Homebridge-Meetup",
+        "username": "CC:22:3D:E3:CE:21",
+        "port": 51826,
+        "pin": "031-45-156"
+    },
+    
+    "description": "This has some fake accessories",
+
+    "accessories": [
+        {
+            "accessory":      "PhpSwitch",
+            "name":           "Test Switch",
+            "switch_name":      "Switch 1"
+        }
+    ],
+
+    "platforms": []
+}
