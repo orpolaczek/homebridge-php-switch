@@ -39,7 +39,7 @@ PhpSwitchAccessory.prototype.setPowerOn = function(powerOn, callback) {
   this.binaryState = powerOn ? 1 : 0; // wemo langauge
   this.log("Set power state on the '%s' to %s", this.switchName, this.binaryState);
   var requestContent = "action=set&deviceName=" + require('querystring').escape(this.switchName) + "&state=" + (powerOn ? "true" : "false");
-  request(BASE_SERVER_URL + requestContent
+  request(BASE_SERVER_URL + "?" + requestContent
     , function (error, response, body) {
       callback(null);
     });
